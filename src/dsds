@@ -1,0 +1,29 @@
+  public static String generatePassword(int length) {
+        String upper = "ABCDEFGHIJKLMNOPQRSTUVXYZ";
+        String lower = "abcdefghijklmnopqrstuvwxyz";
+        String numbers = "1234567890";
+        String special = "!@#$%^&*()-_=+[]{}|;:,.<>?";
+
+        String allChars = upper + lower + numbers + special;
+
+        Random random = new Random();
+        StringBuilder password = new StringBuilder();
+
+        password.append(upper.charAt(random.nextInt(upper.length())));
+        password.append(lower.charAt(random.nextInt(lower.length())));
+        password.append(numbers.charAt(random.nextInt(numbers.length())));
+        password.append(special.charAt(random.nextInt(special.length())));
+
+        for (int i = 4; i < length; i++) {
+            password.append(allChars.charAt(random.nextInt(allChars.length())));
+        }
+
+        char[] passArray = password.toString().toCharArray();
+        for (int i = 0; i < passArray.length; i++) {
+            int j = random.nextInt(passArray.length);
+            char temp = passArray[i];
+            passArray[i] = passArray[j];
+            passArray[j] = temp;
+        }
+        return new String(passArray);
+    }
